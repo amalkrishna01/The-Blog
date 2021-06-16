@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<div class="card mb-3" style="background-color: rgb(157, 165, 42); margin: auto;
+width: 50%;" >
+  <div class="row g-0">
+    <div class="col-md-4">
+      &nbsp; &nbsp; &nbsp;
+      
+      {% if post.author.profile.profile_pic %}
+        
+        <img src="{{post.author.profile.profile_pic.url}}" width = 100 height= 100 class=" rounded-circle">
+       
+      {% else %}
+      
+      <img src="https://iconape.com/wp-content/png_logo_vector/user-circle.png" width = 100 height= 100 class=" rounded-circle">
+
+      {% endif %}
+      
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">By: {{post.author.first_name}} {{post.author.last_name}} ({{post.author}})</p>
+        <p class="card-text"><small class="text-muted">{{total_likes}}Likes  .  {{post.post_date}}</small></p>
+        <a href="{% url 'show_profile' post.author.profile.id %}"> Profile</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  
+<h1 style="text-align: center;">{{post.title}}</h1>
+
+
+<h6 style="font-style: italic; text-align: center;">By: {{post.author.first_name}} {{post.author.last_name}} ({{post.author}})</h6>
+<h6 style="text-align: center;">{{total_likes}}Likes  .  {{post.post_date}}</h6> 
+  
+
+-->
+
+{% if user.id == post.author.id %}
+<a class="btn btn-group-sm btn-lg" href="{% url 'edit' post.pk %}" >Edit</a>
+<a class="btn btn-group-sm btn-lg" href="{% url 'delete' post.pk %}" >Delete</a>
+{% endif %}
+<hr>
+
+<div class="alert alert-light" role="alert" id="postbody">
+  
+{% if post.header_image %}
+<img src = " {{post.header_image.url}} "  style="height: 10rem; width: 27rem; "> <br><br>
+{% endif %}
+  {{post.body|safe}} 
+  </div>
+
+  <hr>
+  <h2 style="color: aliceblue;">Comments...</h2>
+
+  {% if not post.comments.all %}
+      <a href="{% url 'comment' post.pk %}"> Add Comment</a> 
+
+  {% else %}
+    <a href="{% url 'comment' post.pk %}"> Add Comment</a> <br>
+      {% for comment in post.comments.all %}
+      <strong style="color: aliceblue;">
+        {{ comment.name}} -
+        {{ comment.date_added }}
+      </strong>
+      <br>
+      <p style="color: rgb(18, 134, 235);">
+      {{ comment.body}}
+      </p>
+      {% endfor %}
+    
+  {% endif %}
+  
+
+
+<br><br>
+<a class="btn btn-secondary" href="{% url 'landing' %}" >Back</a>
+<br><br>
+<form  action = "{% url 'like_post' post.pk %}" method="POST" >
+  {% csrf_token %}
+
+  {% if liked %}
+
+  <button type="submit" , name="post_id" , value="{{post.id }}" , class="btn btn-danger small">Unlike </button>  
+
+  {% else %}
+  <button type="submit" , name="post_id" , value="{{post.id }}" , class="btn btn-success small">Like </button>  
+  
+  
+  {% endif %}
+
+</form>
+<br>
+
+<style>
+  #postbody{
+    width: 85rem;
+    margin: auto;
+  }
+</style>
+
+{% endblock body %}
+

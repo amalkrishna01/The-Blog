@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} Home{% endblock title %}
+
+{% block body %}
+<!-- <h1>Blogs</h1> --><center>
+<h1 class="display-3">Blogs</h1></center>
+<ul>
+{% for post in object_list%}
+<div class="card alert-dark" id="card">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}} <br><h6> {{post.author.first_name}} {{post.author.last_name}}</h6></h5><hr>
+      <p class="card-text">
+        {% if post.header_image %}
+          <img src = " {{post.header_image.url}} "  style="height: 10rem; width: 27rem; "> <br><br>
+        {% endif %} 
+
+        {{post.body|slice:'500'|safe}}
+      </p>
+      <a href="{% url 'detail' post.pk %}" class="btn btn-dark">Open</a>
+    </div>
+  </div>
+  <br>
+
+{% endfor %}
+
+
+
+</ul>
+<p class="btn btn-dark" class="float-end" >
+  <a href="#">Back to top</a>
+</p>
+
+<style>
+#card {
+  width: 85rem;
+}
+
+</style>
+{% endblock body %}
+
+
+<!--  
+  
+  <li> <a href="{% url 'detail' post.pk %}">{{post.title}}</a> || {{post.author}} <br>
+    {{post.body|slice:'75'}}
+    </li>
+-->

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Edit Profile{% endblock title %}
+
+{% block body %}
+  
+<h1>Update Credentials</h1>
+
+<div class= 'form-group'> 
+    <form method ="POST" >
+        {% csrf_token %}
+        {% for field in account_form %}
+            <p>
+                {{field.label_tag}}
+                {{field}}
+                {% for error in field.errors %} 
+                <p> {{error}} </p>
+                {% endfor %}
+
+            </p>
+        
+        {% endfor %}
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<a class="btn btn-secondary" href="{% url 'landing' %}" >Back</a>
+
+
+
+{% endblock body %}
