@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+{% if user.id == profile.user.id %}
+
+<h1>Edit Profile</h1>
+<div class= 'form-group'> 
+    <form method ="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+       
+        {{form.as_p}}
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success">Update Profile Page</button>
+    </form>
+</div>
+
+
+
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<a class="btn btn-secondary" href="{% url 'landing' %}" >Back</a>
+
+
+<style>
+.form-group{
+    width: 85rem;
+}
+</style>
+
+{% else %}
+<h1>Restricted access</h1>
+
+<a href="{% url 'landing' %}"> Home </a>
+    
+{% endif %}
+    
+
+
+{% endblock body %}

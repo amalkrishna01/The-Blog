@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %} {% endblock title %}</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
+    
+  </head>
+  
+  <body id="body">
+    {% if user.is_authenticated%}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{% url 'addpost' %}"
+                >Add Post</a
+              >
+            </li>
+              {% if cat_menu %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Category
+              </a>
+              <ul  class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for item in cat_menu %} 
+                <li><a class="dropdown-item" href=" {% url 'category' item %}">{{item}}</a></li>
+                <!-- <li><hr class="dropdown-divider" /></li> -->
+                {% endfor %}
+
+                {% endif%}
+                  
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{user.first_name}} {{user.last_name}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width: 1cm;">
+            
+            {% if user.profile.id  %}
+            <li><a class="dropdown-item" href="{% url 'show_profile' user.profile.id %}" >My Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'edit_profile' user.profile.id%}" >Edit Profile</a></li>
+
+            {% else %}
+
+            <li><a class="dropdown-item" href="{% url 'create_profile' %}" >Create Profile</a></li>            
+            {% endif %}
+            <li><a class="dropdown-item" href="{% url 'cred' %}" >Edit Credentials</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <style>
+      #body{
+        
+        background-image: url("https://wallpapercave.com/wp/wp2686499.jpg") ;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 1900px 760px;
+      }
+    </style>
+    {% block body%}
+    
+    {% endblock body %}
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+   
+  
+    {% else %}
+    
+    
+    <center><br><br>
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://i.ytimg.com/vi/jXdbw21SKQg/mqdefault.jpg" class="d-block w-20" alt="...">
+          </div>
+        </div>
+      </div>
+      <br><br>
+    <div class="alert alert-dark" role="alert" style="width: 85rem;">
+      Ahhhhhh!!!!! Seems like you are not logged in.No worries.... It's free.
+      
+    </div>
+    <div class="alert alert-success" role="alert" style="width: 85rem;">
+      <a class="btn btn-primary btn-lg" href="{% url 'register' %}">Sign Up </a> &nbsp;
+      <a class="btn btn-secondary btn-lg" href="{% url 'login' %}">Sign In</a>
+    </div>
+  </center>
+
+    {% endif %}
+
+  </body>
+  
+</html>

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<h1>{{profile.user.first_name}} {{profile.user.last_name}}</h1>
+<small>{{profile.user.username}}</small>
+<br>
+
+{% if page_user.profile_pic %}
+        
+        <img src="{{page_user.profile_pic.url}}" width = 100 height= 100 class=" rounded-circle">
+       
+      {% else %}
+      
+      <img src="https://iconape.com/wp-content/png_logo_vector/user-circle.png" width = 100 height= 100 class=" rounded-circle">
+
+      {% endif %}
+
+
+<br>
+
+{% if page_user.bio %}
+  
+<h3>Bio</h3> <br>
+{{page_user.bio}}
+<br>
+{% endif %}
+
+<br>
+
+{% if page_user.website_url %}
+<a href="{{page_user.website_url}}"><h3>Website</h3></a>
+<br>
+  
+{% endif %}
+  
+
+
+{% if page_user.instagram_url %}
+  
+
+  
+<br>
+<a href="{{page_user.instagram_url}}"> <h3>Instagram</h3></a>
+
+{% endif %}
+
+
+{% endblock body %}

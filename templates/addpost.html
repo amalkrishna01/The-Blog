@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<h1>Add Blog</h1>
+<div class= 'form-group'> 
+    <form method ="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.media}}
+        {{form.as_p}}
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success">Post</button>
+    </form>
+</div>
+<script>
+    var name = "{{user.id}}";
+    document.getElementById('temp').value = name;
+</script>
+
+
+
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;
+<a class="btn btn-secondary" href="{% url 'landing' %}" >Back</a>
+
+
+<style>
+.form-group{
+    width: 85rem;
+}
+</style>
+{% endblock body %}

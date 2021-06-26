@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div class="login">
+        <img src="https://png.pngitem.com/pimgs/s/20-203432_profile-icon-png-image-free-download-searchpng-ville.png" />
+        <h1>Login Page</h1>
+        <form  method="POST">
+          {% csrf_token %}
+            <input type="text" name="username" class="username" placeholder="username"> <br>
+            <input type="password" name="password" class="password" placeholder="password"> <br>
+            <input type="Submit" class="btn btn-primary mb-3" >
+
+        </form>
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+            <h3> {{message}} </h3>
+            {% endfor %}
+        </div>
+
+    </div>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-image: url(https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGJsb2d8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80);
+            background-position: center;
+        }
+
+
+        .login {
+            width: 300px;
+            box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+            background: #fff;
+            padding: 20px;
+            margin: 8% auto 0;
+            text-align: center;
+            
+
+        }
+        .login h1
+        {
+            color:#1c8adb;
+            margin-bottom: 30px;
+        }
+ 
+        .username {
+            border-radius: 20px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 90%;
+            border: 1px solid #999;
+            outline: none;
+        }
+        .password {
+            border-radius: 20px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 90%;
+            border: 1px solid #999;
+            outline: none;
+        }
+
+        img {
+            width: 70px;
+            margin-top: -50px;
+        }
+
+    </style>
+
+    
+</body>
+</html>
+
+
+
+
+
+
+<!--  
+<body>
+    <form  method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username"> <br>
+        <input type="text" name="password" placeholder="password"> <br>
+        <input type="Submit">
+
+    </form>
+
+    <div>
+        {% for message in messages %}
+        <h3> {{message}} </h3> 
+        {% endfor %}
+    </div>
+</body>
+-->

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}
+Edit Post  
+{% endblock title %}
+
+{% block body %}
+{% if user.id == post.author.id %}
+<h1>Edit Blog</h1>
+<div class= 'form-group'> 
+    <form method ="POST" >
+        {% csrf_token %}
+        {{form.media}}
+        {{form.as_p}}
+        <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-success">Post</button>
+    </form>
+</div>
+<script>
+    var name = "{{user.id}}";
+    document.getElementById('temp').value = name;
+</script>
+
+{% else %}
+<div>
+    Only authors can edit/delete and update posts :(
+</div>
+
+{% endif %}
+
+
+
+
+<br><br><br>
+<a class="btn btn-secondary" href="{% url 'landing' %}" >Back</a>
+
+<style>
+    .form-group{
+        width: 85rem;
+    }
+    </style>
+
+
+
+{% endblock body %}
