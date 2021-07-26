@@ -1,7 +1,6 @@
 
 # MITBlogger
 
-A brief description of what this project does and who it's for
 The project ‘MIT Bloggers’ is a web-based application. This website will serve as a platform
 for students where they can share their knowledge and talent with the other students of
 the University. Today, social media and blog websites play a major role in learning and
