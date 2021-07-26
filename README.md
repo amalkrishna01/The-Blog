@@ -29,10 +29,10 @@ Prof. Rohini Bhosale
 ## Contributing
 
 BY:
-Amal Krishna 
-Neha Koli 
-Paritosh Dhake 
-Riya Shah 
+##### Amal Krishna 
+##### Neha Koli 
+##### Paritosh Dhake 
+##### Riya Shah 
 
   
 ## Class Diagram
